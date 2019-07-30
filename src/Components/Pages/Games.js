@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getGames } from '../../Games/Games-Actions';
 
-const Games = () => {
-    return (
-        <div>
-            <h3>Games</h3>
-            <ul>
-                <li>Game 1</li>
-                <li>Game 2</li>
-                <li>Game 3</li>
-            </ul>
-        </div>
-    );
+class Games extends Component {
+    componentDidMount() {
+        this.props.dispatch(getGames())
+    }
+
+    render(){
+        return (
+            <div>
+                <h3>Games</h3>
+                <ul>
+                    {
+                        this.props.gamesList.map((game) => 
+                            <li key={game._id}>{game.name}</li>
+                        )
+                    }
+                </ul>
+            </div>
+        );
+    }
 };
 
-export default Games;
+const mapStateToProps = (state) => ({
+    gamesList: state.games
+});
+
+export default connect(mapStateToProps)(Games);
