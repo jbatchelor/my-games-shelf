@@ -1,25 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import createSagaMiddleware from 'redux-saga';
-import { composeWithDevTools } from "redux-devtools-extension";
-import App from "./Components/App";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import configureStore from "./store/configureStore";
+import App from "./containers/App";
+import './styles/index.scss';
 
-import rootReducer from './Games/Games-Reducers';
-import gamesWatcher from './Games/Games-Sagas';
-
-const sagaMiddleware = createSagaMiddleware();
-
-const configureStore = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(sagaMiddleware))
-);
-sagaMiddleware.run(gamesWatcher);
+const store = configureStore();
 
 ReactDOM.render(
-    <Provider store={configureStore}>
-    <App/>
-    </Provider>,
+    <BrowserRouter>
+        <Provider store={store}>
+        <App/>
+        </Provider>
+    </BrowserRouter>,
     document.querySelector("#root")
 );

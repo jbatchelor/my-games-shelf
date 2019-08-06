@@ -1,0 +1,25 @@
+.gameHeading {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.game {
+    width:auto;
+    clear:both;
+    .gameThumb
+    {
+        float:left;
+        background-position: left top;
+        background-repeat: no-repeat;
+        background-size: contain;
+        height: 400px;
+        width: 200px;
+        margin-right: 1em; 
+    }
+    .gameDetail {
+        float:left;
+        height:400px;
+        width:auto;
+        dt { font-weight: bold; }
+        dt + dd { margin-bottom: 1rem; }
+    }
+}
