@@ -2,10 +2,22 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchGames } from "../actions/gameActions";
+import "../styles/game.scss";
 
 class GamesPage extends Component {
     componentDidMount() {
         this.props.dispatch(fetchGames());
+    }
+
+    renderTableRow(game){
+        return(
+            <tr key={game._id}>
+                <td><img src={(game.thumbURL)?game.thumbURL:game.imageURL} width="50" /></td>
+                <td><Link to={`/games/${game._id}`}>{game.name}</Link></td>
+                <td>{game.publisher}</td>
+                <td>Edit | Delete</td>
+            </tr>
+        )
     }
 
     render(){
@@ -14,14 +26,17 @@ class GamesPage extends Component {
         }
 
         return (
-            <div>
-                <h3>Games</h3>
-                <ul>
-                    {
-                        this.props.gamesList.map((game) => <li key={game._id}><Link to={`/games/${game._id}`}>{game.name}</Link></li>)
-                    }            
-                </ul>
-            </div>
+            <>
+                <h3 className="gameHeading">Games</h3>
+                <table className="gameGrid">
+                    <tbody>
+                        {
+                            this.props.gamesList.map((game) => this.renderTableRow(game))
+                        }
+                    </tbody>            
+                </table>
+                <Link to="/game/new" className="bx--btn bx--btn--primary">New Game</Link>
+            </>
         );
     }
 };

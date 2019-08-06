@@ -14,8 +14,8 @@ export const getGame = (gameId) => {
                     .then(response => response.data);
 };
 
-export const createGame = (game) => {
-    return axios.post('//localhost:3004/create', game)
+export const createGame = ({game}) => {
+    return axios.post('//localhost:3004/games/create', game)
                     .then(response => response.data);
 };
 

@@ -8,8 +8,8 @@ export function getGame(game) {
    return { type: types.FETCH_GAME, game }
 }
 
-export function createGame(gameId) {
-   return { type: types.CREATE_GAME, gameId }
+export function createGame(game) {
+   return { type: types.CREATE_GAME, game }
 }
 
 export function updateGame(game, gameId) {

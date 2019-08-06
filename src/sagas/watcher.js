@@ -1,5 +1,5 @@
 import { takeLatest } from "redux-saga/effects";
-import { fetchGamesSaga, fetchGameDetails } from './gamesSaga';
+import { fetchGamesSaga, fetchGameDetails, addNewGameToLibrary } from './gamesSaga';
 import * as types from "../constants/actionTypes";
 
 export function* watchFetchGames() {
@@ -8,4 +8,8 @@ export function* watchFetchGames() {
 
 export function* watchFetchGameDetails() {
     yield takeLatest(types.FETCH_GAME, fetchGameDetails);
+}
+
+export function* watchCreateGame() {
+    yield takeLatest(types.CREATE_GAME, addNewGameToLibrary);
 }

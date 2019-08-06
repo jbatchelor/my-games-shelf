@@ -2,6 +2,23 @@
     font-size: 2.5rem;
     font-weight: bold;
 }
+
+.gameGrid {
+    tr {
+        &:nth-child(odd) td {
+            background-color: rgba(120,120,255,.25)
+        }
+        &:hover td {
+            background-color: rgba(223,110,150,.3);
+        }
+        td {
+            background-color: rgba(120,120,220,.15);
+            padding:.5rem 1rem;
+            vertical-align:middle;
+            min-height: 60px;
+        }
+    }
+}
 .game {
     width:auto;
     clear:both;
