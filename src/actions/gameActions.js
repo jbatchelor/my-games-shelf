@@ -12,8 +12,8 @@ export function createGame(game) {
    return { type: types.CREATE_GAME, game }
 }
 
-export function updateGame(game, gameId) {
-   return { type: types.UPDATE_GAME, game, gameId }
+export function updateGame(game) {
+   return { type: types.UPDATE_GAME, game }
 }
 
 export function deleteGame(gameId) {

@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchGames } from "../actions/gameActions";
+import { fetchGames, deleteGame } from "../actions/gameActions";
 import "../styles/game.scss";
 
 class GamesPage extends Component {
+    constructor(props) {
+        super(props);
+        this.handleDeleteGame = this.handleDeleteGame.bind(this);
+    }
+
     componentDidMount() {
-        this.props.dispatch(fetchGames());
+        this.props.fetchGames();
+    }
+
+    handleDeleteGame(evt){
+        evt.preventDefault();
+        const btnDelete = evt.target;
+        const gameid = (btnDelete && btnDelete.dataset.gameid) ? btnDelete.dataset.gameid : "";
+        if(gameid.length > 0)  this.props.removeGame(gameid);
     }
 
     renderTableRow(game){
@@ -15,7 +27,7 @@ class GamesPage extends Component {
                 <td><img src={(game.thumbURL)?game.thumbURL:game.imageURL} width="50" /></td>
                 <td><Link to={`/games/${game._id}`}>{game.name}</Link></td>
                 <td>{game.publisher}</td>
-                <td>Edit | Delete</td>
+                <td>Edit | <a href="#" onClick={this.handleDeleteGame} data-gameid={game._id}>Delete</a></td>
             </tr>
         )
     }
@@ -45,4 +57,9 @@ const mapStateToProps = state => ({
     gamesList: state.gamesList.games
 });
 
-export default connect(mapStateToProps)(GamesPage);
+const mapDispatchToProps = dispatch => ({
+    fetchGames: () => dispatch(fetchGames()),
+    removeGame: game => dispatch(deleteGame(game))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(GamesPage);

@@ -31,17 +31,23 @@ export function* addNewGameToLibrary(action) {
     }
 }
 
-export function* updateGameDetails(gameId, game) {
+export function* updateGameDetails(action) {
     try{
         // updating a game
+        const { game } = action;
+        const gameDetails = yield call(updateGame, game._id, game);
+        yield put({ type: types.GAME_UPDATED, game: gameDetails });
     } catch (error) {
         yield put({ type: types.GAME_UPDATE_FAILED, error });
     }
 }
 
-export function* removeGameFromLibrary(gameId) {
+export function* removeGameFromLibrary({gameId}) {
     try{
         // delete a game
+        debugger;
+        const delResults = yield call(removeGame, gameId);
+        yield put({ type: types.GAME_DELETED, data: delResults });
     } catch (error) {
         yield put({ type: types.GAME_DELETE_FAILED, error });
     }

@@ -17,7 +17,7 @@ class App extends Component {
                     <Route path="/" exact component={Home} />
                     <Route path="/games" exact component={Games} />
                     <Route path="/game/new" exact component={CreateGame} />
-                    <Route path="/games/:id" component={GameDetails} />
+                    <Route path="/games/:id" exact component={GameDetails} />
                 </Content>
             </>
         )

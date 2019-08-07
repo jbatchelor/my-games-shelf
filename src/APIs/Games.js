@@ -20,11 +20,11 @@ export const createGame = ({game}) => {
 };
 
 export const updateGame = (gameId, game) => {
-    return axios.put(`//localhost:3004/${gameId}/update`, game)
+    return axios.put(`//localhost:3004/games/${gameId}/update`, game)
                     .then(response => response.data);
 };
 
 export const removeGame = (gameId) => {
-    return axios.delete(`//localhost:3004/${gameId}/delete`)
+    return axios.delete(`//localhost:3004/games/${gameId}/delete`)
                     .then(response => response.data);
 };
