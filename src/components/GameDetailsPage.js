@@ -5,7 +5,7 @@ import '../styles/game.scss';
 
 class GameDetails extends Component {
     componentDidMount() {
-        this.props.dispatch(getGame(this.props.match.params.id))
+        this.props.fetchGame(this.props.match.params.id);
     }
 
     render() {
@@ -33,4 +33,8 @@ class GameDetails extends Component {
 
 const mapStateToProps = state => ({ gameDetails: state.gamesList.game});
 
-export default connect(mapStateToProps)(GameDetails);
+const mapDispatchToProps = dispatch => ({
+    fetchGame: gameId => dispatch(getGame(gameId))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameDetails);

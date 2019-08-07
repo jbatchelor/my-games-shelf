@@ -6,6 +6,7 @@ import Home from '../components/HomePage';
 import Games from '../components/GamesPage';
 import GameDetails from '../components/GameDetailsPage';
 import CreateGame from "../components/CreateGamePage";
+import UpdateGame from "../components/UpdateGamePage";
 import AppHeader from "../common/header";
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
                     <Route path="/games" exact component={Games} />
                     <Route path="/game/new" exact component={CreateGame} />
                     <Route path="/games/:id" exact component={GameDetails} />
+                    <Route path="/game/:id/edit" component={UpdateGame} />
                 </Content>
             </>
         )

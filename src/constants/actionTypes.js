@@ -11,7 +11,7 @@ export const FETCH_GAME = 'FETCH_GAME';
 export const GAME_RECEIVED = 'GAME_RECEIVED';
 export const GAME_REQUEST_FAILED = 'GAME_REQUEST_FAILED';
 // Update single game
-export const UPDATE_GAME = 'FETCH_GAME';
+export const UPDATE_GAME = 'UPDATE_GAME';
 export const GAME_UPDATED = 'GAME_UPDATED';
 export const GAME_UPDATE_FAILED = 'GAME_UPDATE_FAILED';
 // Delete single game
