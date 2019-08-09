@@ -8,39 +8,43 @@ class UpdateGamePage extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleUpdateGameState = this.handleUpdateGameState.bind(this);
 
-        this.state = {
-            name:'',
-            thumbURL:'',
-            imageURL:'',
-            msrp:0,
-            publisher:''
-        };
+        this.state = this.props.game;
     }
 
     componentDidMount() {
-        this.props.fetchGame(this.props.match.params.id);
+        const game = this.props.fetchGame(this.props.match.params.id);
+        this.setState({ game });
+    }
+
+    handleUpdateGameState(event){
+        const fld = event.target.name;
+        const game = this.props.game;
+        game[fld] = event.target.value;
+        return this.setState({ game });
     }
 
     handleSubmit(event){
         event.preventDefault();
-        const updateGame = this.props.updateGame({
-            game: this.state
-        });
+        this.props.updateGame(this.state.game._id, this.state.game);
         this.props.history.push('/games')
     }
 
     render() {
+        const { game } = this.props;
+        if(game === undefined) return(<div>Loading...</div>);
+
         return (
             <>
             <h3 className="gameHeading">Add Game</h3>
             <div className="game bx--form-item">
                 <Form>
-                    <TextInput id="name" labelText="Title" value={this.state.name} onChange={(evt) => this.setState({name: evt.target.value})} />
-                    <TextInput id="thumbURL" labelText='Thumbnail Image URL:' value={this.state.thumbURL} onChange={(evt) => this.setState({thumbURL: evt.target.value})} />
-                    <TextInput id="imageURL" labelText='Large Image URL:' value={this.state.imageURL} onChange={(evt) => this.setState({imageURL: evt.target.value})} />
-                    <NumberInput id="msrp" label='Cost:' value={this.state.msrp} onChange={(evt) => this.setState({msrp: parseFloat(evt.target.value)})} />
-                    <TextInput id="publisher" labelText='Publisher:' value={this.state.publisher} onChange={(evt) => this.setState({publisher: evt.target.value})} />
+                    <TextInput id="name" name="name" labelText="Title" value={game.name} onChange={this.handleUpdateGameState} />
+                    <TextInput id="thumbURL" name="thumbURL" labelText='Thumbnail Image URL:' value={game.thumbURL} onChange={this.handleUpdateGameState} />
+                    <TextInput id="imageURL" name="imageURL" labelText='Large Image URL:' value={game.imageURL} onChange={this.handleUpdateGameState} />
+                    <NumberInput id="msrp" name="msrp" label='Cost:' value={game.msrp} onChange={this.handleUpdateGameState} />
+                    <TextInput id="publisher" name="publisher" labelText='Publisher:' value={game.publisher} onChange={this.handleUpdateGameState} />
                     <Button onClick={this.handleSubmit}>Add Game</Button>
                 </Form>
             </div>
@@ -51,13 +55,13 @@ class UpdateGamePage extends Component {
 
 function mapStateToProps(state){
     return {
-        updateGame: state.updateGame
+        game: state.gamesList.game
     }
 }
 
 const mapDispatchToProps = dispatch => ({
     fetchGame: gameId => dispatch(getGame(gameId)),
-    updateGame: game => dispatch(updateGame(game))
+    updateGame: (gameId, game) => dispatch(updateGame(gameId, game))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateGamePage);

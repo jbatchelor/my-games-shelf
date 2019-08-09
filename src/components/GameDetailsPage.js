@@ -13,7 +13,7 @@ class GameDetails extends Component {
 
         const { name, msrp, publisher, imageURL, thumbURL } = this.props.gameDetails;
         const thumbStyle = {
-            backgroundImage: `url('${(thumbURL)?thumbURL:imageURL}')`
+            backgroundImage: `url('${(imageURL)?imageURL:thumbURL}')`
         };
         
         return (

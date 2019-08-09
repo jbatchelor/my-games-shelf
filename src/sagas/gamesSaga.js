@@ -34,8 +34,8 @@ export function* addNewGameToLibrary(action) {
 export function* updateGameDetails(action) {
     try{
         // updating a game
-        const { game } = action;
-        const gameDetails = yield call(updateGame, game._id, game);
+        const { gameId, game } = action;
+        const gameDetails = yield call(updateGame, gameId, game);
         yield put({ type: types.GAME_UPDATED, game: gameDetails });
     } catch (error) {
         yield put({ type: types.GAME_UPDATE_FAILED, error });

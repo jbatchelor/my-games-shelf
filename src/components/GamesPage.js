@@ -27,7 +27,7 @@ class GamesPage extends Component {
                 <td><img src={(game.thumbURL)?game.thumbURL:game.imageURL} width="50" /></td>
                 <td><Link to={`/games/${game._id}`}>{game.name}</Link></td>
                 <td>{game.publisher}</td>
-                <td>Edit | <a href="#" onClick={this.handleDeleteGame} data-gameid={game._id}>Delete</a></td>
+                <td><Link to={`/game/${game._id}/edit`}>Edit</Link> | <a href="#" onClick={this.handleDeleteGame} data-gameid={game._id}>Delete</a></td>
             </tr>
         )
     }
